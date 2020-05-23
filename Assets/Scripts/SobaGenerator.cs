@@ -6,6 +6,7 @@ public class SobaGenerator : MonoBehaviour
 {
     public GameObject soba;
     public GameObject spicySoba;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,9 @@ public class SobaGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.timer < 0.0f){
+            Destroy(this.gameObject);
+        }
         
     }
 

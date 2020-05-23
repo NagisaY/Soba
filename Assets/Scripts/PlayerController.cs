@@ -4,31 +4,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
     Vector3 setPos;
-    public int eatCount;
+    public static int eatCount = 0;
+    public int scoreCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        //DontDestroyOnLoad(this);
         setPos = this.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        scoreCount = eatCount;
+        //Debug.Log(eatCount);
+
+        if (gameManager.timer > 0.0f)
         {
-            this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
+            }
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                this.transform.position = setPos;
+            }
         }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+        else
         {
             this.transform.position = setPos;
+            //this.gameObject.SetActive(false);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,5 +57,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("OMG!");
             Destroy(other.gameObject);
         }
+    }
+
+    public static int getEatCount()
+    {
+        return eatCount;
     }
 }

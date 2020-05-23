@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript3 : MonoBehaviour
+public class SobaController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,9 @@ public class NewBehaviourScript3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(this.transform.position.y < -10)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

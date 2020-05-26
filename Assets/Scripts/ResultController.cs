@@ -18,7 +18,7 @@ public class ResultController : MonoBehaviour
     void Update()
     {
         resultScoreText.text = resultScore.ToString() + " はい";
-        if (resultScore > 20)
+        if (resultScore > 10)
         {
             banzukeText.text = "横綱級！";
         }
@@ -26,5 +26,7 @@ public class ResultController : MonoBehaviour
         {
             banzukeText.text = "○○級";
         }
-    }
+
+        //MEMO	横綱	大関 関脇 小結
+}
 }

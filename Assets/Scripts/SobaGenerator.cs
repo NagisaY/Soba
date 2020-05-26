@@ -11,7 +11,8 @@ public class SobaGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SobaGen", 2, 3);
+        InvokeRepeating("SobaGen", 2, 0.5f);
+
     }
 
     // Update is called once per frame
@@ -29,4 +30,7 @@ public class SobaGenerator : MonoBehaviour
         Instantiate(spicySoba, new Vector3(5.0f, 10.0f, 0.0f), Quaternion.identity);
 
     }
+
+    //MEMO
+    //ランダム生成実装
 }

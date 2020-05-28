@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class SobaGenerator : MonoBehaviour
 {
-    public GameObject soba;
-    public GameObject spicySoba;
+    public GameObject[] soba;
+    //public GameObject soba;
+    //public GameObject spicySoba;
     public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SobaGen", 2, 0.5f);
+        int number = Random.Range(2,5);
+        int number_2 = Random.Range(2, 5);
+
+        InvokeRepeating("SobaGenRight", number, 0.5f);
+        InvokeRepeating("SobaGenLeft", number, 0.5f);
 
     }
 
@@ -24,10 +29,19 @@ public class SobaGenerator : MonoBehaviour
         
     }
 
-    void SobaGen()
+    void SobaGenRight()
     {
-        Instantiate(soba, new Vector3(-5.0f, 10.0f, 0.0f), Quaternion.identity);
-        Instantiate(spicySoba, new Vector3(5.0f, 10.0f, 0.0f), Quaternion.identity);
+        int number = Random.Range(0, soba.Length);
+        float pos_y = Random.Range(6.5f,12.5f); 
+        Instantiate(soba[number], new Vector3(5.0f, pos_y, 0.0f), Quaternion.identity);
+
+    }
+
+    void SobaGenLeft()
+    {
+        int number = Random.Range(0, soba.Length);
+        float pos_y = Random.Range(6.5f, 12.5f);
+        Instantiate(soba[number], new Vector3(-5.0f, pos_y, 0.0f), Quaternion.identity);
 
     }
 

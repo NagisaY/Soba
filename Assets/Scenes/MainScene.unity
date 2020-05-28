@@ -867,9 +867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb46972efeab34b2d882a76937aed3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soba: {fileID: 4320813884738188761, guid: 4c74fa7e6c5ff419586a5da0d3fc542e, type: 3}
-  spicySoba: {fileID: 7713467090247010760, guid: b7503b26afb0942adb6c47b848eb68f4,
-    type: 3}
+  soba:
+  - {fileID: 4320813884738188761, guid: 4c74fa7e6c5ff419586a5da0d3fc542e, type: 3}
+  - {fileID: 4320813884738188761, guid: 4c74fa7e6c5ff419586a5da0d3fc542e, type: 3}
+  - {fileID: 4320813884738188761, guid: 4c74fa7e6c5ff419586a5da0d3fc542e, type: 3}
+  - {fileID: 7713467090247010760, guid: b7503b26afb0942adb6c47b848eb68f4, type: 3}
   gameManager: {fileID: 2142574775}
 --- !u!4 &1342058752
 Transform:

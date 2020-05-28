@@ -68,21 +68,21 @@ public class PlayerController : MonoBehaviour
         manpukuCount = 0;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Soba")
-        {
-            Debug.Log("eat");
-            Destroy(other.gameObject);
-            eatCount++;
-            manpukuCount++;
-        }
-        if (other.gameObject.tag == "SpicySoba")
-        {
-            Debug.Log("OMG!");
-            Destroy(other.gameObject);
-            manpukuCount++;
-        }
+            if(other.gameObject.tag == "Soba")
+            {
+                Debug.Log("eat");
+                Destroy(other.gameObject);
+                eatCount++;
+                manpukuCount++;
+            }
+            if (other.gameObject.tag == "SpicySoba")
+            {
+                Debug.Log("OMG!");
+                Destroy(other.gameObject);
+                manpukuCount++;
+            }
     }
 
     public static int getEatCount()

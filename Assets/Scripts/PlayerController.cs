@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public static int eatCount = 0;
     public static int manpukuCount = 0;
     public int scoreCount;
+    public Slider slider;
 
     bool MoveLock = false;
 
@@ -17,11 +19,14 @@ public class PlayerController : MonoBehaviour
     {
         //DontDestroyOnLoad(this);
         setPos = this.transform.position;
+        slider.maxValue = 5;
+        slider.value = manpukuCount;
     }
 
     // Update is called once per frame
     void Update()
     {
+        slider.value = manpukuCount;
         scoreCount = eatCount;
         //Debug.Log(eatCount);
         if(MoveLock == false)
@@ -38,7 +43,7 @@ public class PlayerController : MonoBehaviour
             {
                 this.transform.position = setPos;
             }
-            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0)
+            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
                 Debug.Log("drink water!");
                 manpukuCount--;

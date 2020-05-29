@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ResultController : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class ResultController : MonoBehaviour
             banzukeText.text = "小結級";
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MainScene");   
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
         //MEMO	横綱	大関 関脇 小結
-}
+    }
 }

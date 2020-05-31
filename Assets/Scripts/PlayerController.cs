@@ -7,17 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     SpriteRenderer MainSpriteRenderer;
     public GameManager gameManager;
+    public joyConTest _joyConTest;
+
     Vector3 setPos;
     public static int eatCount = 0;
     public static int manpukuCount = 0;
     public int scoreCount;
     public Slider slider;
     public Text manpukuText;
+    public Text atodekeshitaiText;
 
     public Sprite[] Sprites;
 
     bool MoveLock = false;
-    bool isPlaying = false;
+    public bool isPlaying = false;
+    bool KeyMode = false;
+    bool JoyConMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,35 +37,59 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(MoveLock);
         if (isPlaying == false)
         {
-             //&& Input.GetKeyDown(KeyCode.Space)
+            if (Input.GetKey(KeyCode.K))
+            {
+                KeyMode = true;
+                atodekeshitaiText.gameObject.SetActive(false);
+
+            }
+            if (Input.GetKey(KeyCode.J))
+            {
+                JoyConMode = true;
+                atodekeshitaiText.gameObject.SetActive(false);
+
+            }
+
+        }
+
+        if (KeyMode == true)
+        {
             Invoke("KeyPlayMode", 0.0f);
 
         }
-        slider.value = manpukuCount;
-        manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
-        scoreCount = eatCount;
-        //Debug.Log(eatCount);
 
-        if (manpukuCount >= 5)
+        if (isPlaying == true)
         {
-            MainSpriteRenderer.sprite = Sprites[3];
-            Debug.Log("onakaippai....");
-            MoveLock = true;
-            this.transform.position = setPos;
-            Invoke("Release", 3.0f);
+            slider.value = manpukuCount;
+            manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
+            scoreCount = eatCount;
+            //Debug.Log(eatCount);
+
+            if (manpukuCount >= 5)
+            {
+                MainSpriteRenderer.sprite = Sprites[3];
+                Debug.Log("onakaippai....");
+                MoveLock = true;
+                this.transform.position = setPos;
+                Invoke("Release", 3.0f);
+            }
+            else if (gameManager.timer < 0.0f)
+            {
+                Debug.Log("shuryo!");
+                MoveLock = true;
+                this.transform.position = setPos;
+            }
         }
-        else if (gameManager.timer < 0.0f)
-        {
-            Debug.Log("shuryo!");
-            MoveLock = true;
-            this.transform.position = setPos;
-        }
+
     }
 
     void KeyPlayMode()
     {
+        Debug.Log("keyMODE");
+        isPlaying = true;
         if (MoveLock == false)
         {
 
@@ -76,6 +105,25 @@ public class PlayerController : MonoBehaviour
             {
                 this.transform.position = setPos;
             }
+            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
+            {
+                MainSpriteRenderer.sprite = Sprites[2];
+                Debug.Log("drink water!");
+                manpukuCount--;
+                Debug.Log(manpukuCount);
+
+            }
+        }
+    }
+
+    void JoyConPlayMode()
+    {
+        Debug.Log("joyconMODE");
+        isPlaying = true;
+        if (MoveLock == false)
+        {
+            GetComponent<joyConTest>().enabled = true;
+
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
                 MainSpriteRenderer.sprite = Sprites[2];
@@ -120,4 +168,5 @@ public class PlayerController : MonoBehaviour
     {
         return eatCount;
     }
+
 }

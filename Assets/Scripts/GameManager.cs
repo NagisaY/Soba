@@ -24,7 +24,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreCountText.text = playerController.scoreCount.ToString() + " はい";
-        timer -= Time.deltaTime;
+        if(playerController.isPlaying == true)
+        {
+            timer -= Time.deltaTime;
+
+        }
         //Debug.Log(timer);
         timerText.text = "のこり時間  " + timer.ToString("f0");
 

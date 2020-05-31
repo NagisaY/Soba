@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] Sprites;
 
     bool MoveLock = false;
+    //bool isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +32,32 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            Invoke("KeyPlayMode", 0.0f);
+
         slider.value = manpukuCount;
         manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
         scoreCount = eatCount;
         //Debug.Log(eatCount);
-        if(MoveLock == false)
+
+        if (manpukuCount >= 5)
+        {
+            MainSpriteRenderer.sprite = Sprites[3];
+            Debug.Log("onakaippai....");
+            MoveLock = true;
+            this.transform.position = setPos;
+            Invoke("Release", 3.0f);
+        }
+        else if (gameManager.timer < 0.0f)
+        {
+            Debug.Log("shuryo!");
+            MoveLock = true;
+            this.transform.position = setPos;
+        }
+    }
+
+    void KeyPlayMode()
+    {
+        if (MoveLock == false)
         {
 
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -58,21 +80,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(manpukuCount);
 
             }
-        }
-
-        if (manpukuCount >= 5)
-        {
-            MainSpriteRenderer.sprite = Sprites[3];
-            Debug.Log("onakaippai....");
-            MoveLock = true;
-            this.transform.position = setPos;
-            Invoke("Release", 3.0f);
-        }
-        else if (gameManager.timer < 0.0f)
-        {
-            Debug.Log("shuryo!");
-            MoveLock = true;
-            this.transform.position = setPos;
         }
     }
 

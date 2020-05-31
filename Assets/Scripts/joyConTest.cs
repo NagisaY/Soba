@@ -79,56 +79,6 @@ public class joyConTest : MonoBehaviour
         }
     }
 
-    //private void OnGUI()
-    //{
-    //    var style = GUI.skin.GetStyle("label");
-    //    style.fontSize = 24;
-
-    //    if (m_joycons == null || m_joycons.Count <= 0)
-    //    {
-    //        GUILayout.Label("Joy-Con が接続されていません");
-    //        return;
-    //    }
-
-    //    if (!m_joycons.Any(c => c.isLeft))
-    //    {
-    //        GUILayout.Label("Joy-Con (L) が接続されていません");
-    //        return;
-    //    }
-
-    //    if (!m_joycons.Any(c => !c.isLeft))
-    //    {
-    //        GUILayout.Label("Joy-Con (R) が接続されていません");
-    //        return;
-    //    }
-
-    //    GUILayout.BeginHorizontal(GUILayout.Width(960));
-
-    //    foreach (var joycon in m_joycons)
-    //    {
-    //        var isLeft = joycon.isLeft;
-    //        var name = isLeft ? "Joy-Con (L)" : "Joy-Con (R)";
-    //        var key = isLeft ? "Z キー" : "X キー";
-    //        var button = isLeft ? m_pressedButtonL : m_pressedButtonR;
-    //        var stick = joycon.GetStick();
-    //        var gyro = joycon.GetGyro();
-    //        var accel = joycon.GetAccel();
-    //        var orientation = joycon.GetVector();
-
-    //        GUILayout.BeginVertical(GUILayout.Width(480));
-    //        GUILayout.Label(name);
-    //        GUILayout.Label(key + "：振動");
-    //        GUILayout.Label("押されているボタン：" + button);
-    //        GUILayout.Label(string.Format("スティック：({0}, {1})", stick[0], stick[1]));
-    //        GUILayout.Label("ジャイロ：" + gyro);
-    //        GUILayout.Label("加速度：" + accel);
-    //        GUILayout.Label("傾き：" + orientation);
-    //        GUILayout.EndVertical();
-    //    }
-
-    //    GUILayout.EndHorizontal();
-    //}
-
     private void SetControllers()
     {
         m_joycons = JoyconManager.Instance.j;

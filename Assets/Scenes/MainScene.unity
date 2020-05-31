@@ -231,6 +231,7 @@ MonoBehaviour:
   manpukuText: {fileID: 0}
   atodekeshitaiText: {fileID: 0}
   Sprites: []
+  MoveLock: 0
   isPlaying: 0
 --- !u!1 &105128629
 GameObject:
@@ -1117,6 +1118,7 @@ MonoBehaviour:
   - {fileID: 3672896461246587751, guid: 1e8328da8d2004ba9a2fca9e62c9e8f0, type: 3}
   - {fileID: 8573031350537710310, guid: b059e717a8b48401ba95502a66c3ab18, type: 3}
   gameManager: {fileID: 2142574775}
+  playerController: {fileID: 0}
 --- !u!4 &1342058752
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,6 +1267,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0655a8f7efc9d4a1ca050d82cb8bc86d, type: 3}
   - {fileID: 21300000, guid: 6254a4bcc7d15414e850e161a9bff5f0, type: 3}
   - {fileID: 21300000, guid: bf873b9d5c768462ab05d7be0a8db00d, type: 3}
+  MoveLock: 0
   isPlaying: 0
 --- !u!212 &1463570051
 SpriteRenderer:
@@ -1380,6 +1383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dee71b4f20c48619575a909f4bf3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1463570050}
 --- !u!1 &1500974686
 GameObject:
   m_ObjectHideFlags: 0

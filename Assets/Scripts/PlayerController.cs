@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public Sprite[] Sprites;
 
-    bool MoveLock = false;
+    public bool MoveLock = false;
     public bool isPlaying = false;
     bool KeyMode = false;
     bool JoyConMode = false;
@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
         if (KeyMode == true)
         {
             Invoke("KeyPlayMode", 0.0f);
+
+        }
+        if (JoyConMode == true)
+        {
+            Invoke("JoyConPlayMode", 0.0f);
 
         }
 
@@ -123,6 +128,7 @@ public class PlayerController : MonoBehaviour
         if (MoveLock == false)
         {
             GetComponent<joyConTest>().enabled = true;
+            GetComponent<JoyconManager>().enabled = true;
 
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {

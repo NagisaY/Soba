@@ -14,6 +14,8 @@ public class joyConTest : MonoBehaviour
     private Joycon m_joyconR;
     //private Joycon.Button? m_pressedButtonL;
     //private Joycon.Button? m_pressedButtonR;
+
+    public PlayerController playerController;
     Vector3 setPos;
 
     private void Start()
@@ -24,32 +26,29 @@ public class joyConTest : MonoBehaviour
 
     private void Update()
     {
-        //var isLeft = m_joyconL.isLeft;
-        //var name = isLeft ? "Joy-Con (L)" : "Joy-Con (R)";
-        //var key = isLeft ? "Z キー" : "X キー";
-        //var button = isLeft ? m_pressedButtonL : m_pressedButtonR;
+
         var stickL = m_joyconL.GetStick();
         var gyroL = m_joyconL.GetGyro();
         var accelL = m_joyconL.GetAccel();
         var orientation = m_joyconL.GetVector();
 
-        if(accelL.y >= 0.5)
+        if(playerController.MoveLock == false)
         {
-            this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
-        }
-        else if (accelL.y <= -0.5)
-        {
-            this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
-        }
-        else
-        {
-            this.transform.position = setPos;
+            if (accelL.y >= 0.5)
+            {
+                this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
+            }
+            else if (accelL.y <= -0.5)
+            {
+                this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
+            }
+            else
+            {
+                this.transform.position = setPos;
 
+            }
         }
 
-
-        //m_pressedButtonL = null;
-        //m_pressedButtonR = null;
 
         if (m_joycons == null || m_joycons.Count <= 0) return;
 
@@ -67,6 +66,16 @@ public class joyConTest : MonoBehaviour
         //{
         //    m_joyconR.SetRumble(160, 320, 0.6f, 200);
         //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.tag == "SpicySoba")
+        {
+            m_joyconL.SetRumble(160, 320, 0.6f, 200);
+
+        }
     }
 
     private void SetControllers()

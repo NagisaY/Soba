@@ -8,12 +8,13 @@ public class SobaGenerator : MonoBehaviour
     //public GameObject soba;
     //public GameObject spicySoba;
     public GameManager gameManager;
+    public PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        int number = Random.Range(2,5);
-        int number_2 = Random.Range(2, 5);
+        int number = Random.Range(3,5);
+        int number_2 = Random.Range(3, 5);
 
         InvokeRepeating("SobaGenRight", number, 0.9f);
         InvokeRepeating("SobaGenLeft", number, 0.9f);

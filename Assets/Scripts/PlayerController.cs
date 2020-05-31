@@ -5,18 +5,23 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    SpriteRenderer MainSpriteRenderer;
     public GameManager gameManager;
     Vector3 setPos;
     public static int eatCount = 0;
     public static int manpukuCount = 0;
     public int scoreCount;
     public Slider slider;
+    public Text manpukuText;
+
+    public Sprite[] Sprites;
 
     bool MoveLock = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         //DontDestroyOnLoad(this);
         setPos = this.transform.position;
         slider.maxValue = 5;
@@ -27,10 +32,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         slider.value = manpukuCount;
+        manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
         scoreCount = eatCount;
         //Debug.Log(eatCount);
         if(MoveLock == false)
         {
+
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
@@ -45,6 +52,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
+                MainSpriteRenderer.sprite = Sprites[2];
                 Debug.Log("drink water!");
                 manpukuCount--;
                 Debug.Log(manpukuCount);
@@ -54,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
         if (manpukuCount >= 5)
         {
+            MainSpriteRenderer.sprite = Sprites[3];
             Debug.Log("onakaippai....");
             MoveLock = true;
             this.transform.position = setPos;
@@ -69,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void Release()
     {
+        MainSpriteRenderer.sprite = Sprites[0];
         MoveLock = false;
         manpukuCount = 0;
     }
@@ -77,14 +87,19 @@ public class PlayerController : MonoBehaviour
     {
             if(other.gameObject.tag == "Soba")
             {
-                Debug.Log("eat");
+            MainSpriteRenderer.sprite = Sprites[0];
+
+            Debug.Log("eat");
                 Destroy(other.gameObject);
                 eatCount++;
                 manpukuCount++;
+            this.transform.localScale += new Vector3(0.07f,0.01f,0.0f);
             }
             if (other.gameObject.tag == "SpicySoba")
             {
-                Debug.Log("OMG!");
+            MainSpriteRenderer.sprite = Sprites[1];
+
+            Debug.Log("OMG!");
                 Destroy(other.gameObject);
                 manpukuCount++;
             }

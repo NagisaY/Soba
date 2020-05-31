@@ -15,8 +15,8 @@ public class SobaGenerator : MonoBehaviour
         int number = Random.Range(2,5);
         int number_2 = Random.Range(2, 5);
 
-        InvokeRepeating("SobaGenRight", number, 0.5f);
-        InvokeRepeating("SobaGenLeft", number, 0.5f);
+        InvokeRepeating("SobaGenRight", number, 0.9f);
+        InvokeRepeating("SobaGenLeft", number, 0.9f);
 
     }
 

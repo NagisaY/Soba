@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] Sprites;
 
     bool MoveLock = false;
-    //bool isPlaying = false;
+    bool isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +32,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPlaying == false)
+        {
+             //&& Input.GetKeyDown(KeyCode.Space)
             Invoke("KeyPlayMode", 0.0f);
 
+        }
         slider.value = manpukuCount;
         manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
         scoreCount = eatCount;

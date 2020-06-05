@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     bool Manpuku = false;
     bool KeyMode = false;
     bool JoyConMode = false;
+    bool manpukuSoundPlay = false;
 
     // Start is called before the first frame update
     void Start()
@@ -93,11 +94,10 @@ public class PlayerController : MonoBehaviour
 
             if (manpukuCount >= 5)
             {
-                bool soundPlay = false;
-                if(soundPlay == false)
+                if(manpukuSoundPlay == false)
                 {
                     sound05.PlayOneShot(sound05.clip);
-                    soundPlay = true;
+                    manpukuSoundPlay = true;
                 }
                 Manpuku = true;
                 MainSpriteRenderer.sprite = Sprites[3];
@@ -180,6 +180,8 @@ public class PlayerController : MonoBehaviour
         }
         sound02.Stop();
         sound05.Stop();
+        manpukuSoundPlay = false;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
 
         if (isPlaying == true)
         {
+            slider.gameObject.SetActive(true);
+            manpukuText.gameObject.SetActive(true);
             slider.value = manpukuCount;
             manpukuText.text = (manpukuCount + " / 5");
             scoreCount = eatCount;

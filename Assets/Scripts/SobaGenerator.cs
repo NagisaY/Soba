@@ -10,7 +10,6 @@ public class SobaGenerator : MonoBehaviour
     public GameManager gameManager;
     public PlayerController playerController;
     int number;
-
     bool start = false;
     // Start is called before the first frame update
     void Start()

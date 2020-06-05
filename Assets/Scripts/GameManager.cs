@@ -11,14 +11,13 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     public Text timeUpText;
     public float timer;
-    int timerSeconds;
     int resultScore = PlayerController.getEatCount();
     private AudioSource sound01;
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = 5;
+        timer = 15;
         AudioSource audioSource = GetComponent<AudioSource>();
         sound01 = audioSource;
     }
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour
         if(playerController.isPlaying == true)
         {
             timer -= Time.deltaTime;
-            timerSeconds = (int)timer;
         }
         //Debug.Log(timer);
         timerText.text = "のこり時間  " + timer.ToString("f0");

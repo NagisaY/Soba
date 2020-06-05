@@ -22,9 +22,12 @@ public class PlayerController : MonoBehaviour
     private AudioSource sound01;
     private AudioSource sound02;
     private AudioSource sound03;
+    private AudioSource sound04;
+    private AudioSource sound05;
 
     public bool MoveLock = false;
     public bool isPlaying = false;
+    bool Manpuku = false;
     bool KeyMode = false;
     bool JoyConMode = false;
 
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour
         sound01 = audioSources[0];
         sound02 = audioSources[1];
         sound03 = audioSources[2];
+        sound04 = audioSources[3];
+        sound05 = audioSources[4];
 
     }
 
@@ -52,6 +57,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.K))
             {
+                sound04.PlayOneShot(sound04.clip);
                 KeyMode = true;
                 atodekeshitaiText.gameObject.SetActive(false);
 
@@ -85,6 +91,13 @@ public class PlayerController : MonoBehaviour
 
             if (manpukuCount >= 5)
             {
+                bool soundPlay = false;
+                if(soundPlay == false)
+                {
+                    sound05.PlayOneShot(sound05.clip);
+                    soundPlay = true;
+                }
+                Manpuku = true;
                 MainSpriteRenderer.sprite = Sprites[3];
                 Debug.Log("onakaippai....");
                 MoveLock = true;
@@ -158,7 +171,13 @@ public class PlayerController : MonoBehaviour
     {
         MainSpriteRenderer.sprite = Sprites[0];
         MoveLock = false;
-        manpukuCount = 0;
+        if(Manpuku == true)
+        {
+            manpukuCount = 0;
+            Manpuku = false;
+        }
+        sound02.Stop();
+        sound05.Stop();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -177,6 +196,9 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.tag == "SpicySoba")
             {
+                MoveLock = true;
+                this.transform.position = setPos;
+                Invoke("Release", 1.0f);
                 MainSpriteRenderer.sprite = Sprites[1];
                 sound02.Play();
                 Debug.Log("OMG!");

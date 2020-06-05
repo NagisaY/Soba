@@ -49,23 +49,10 @@ public class joyConTest : MonoBehaviour
             }
         }
 
-
         if (m_joycons == null || m_joycons.Count <= 0) return;
 
         SetControllers();
 
-
-
-        //if(m_joyconL.GetGyro)
-
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    m_joyconL.SetRumble(160, 320, 0.6f, 200);
-        //}
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    m_joyconR.SetRumble(160, 320, 0.6f, 200);
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D other)

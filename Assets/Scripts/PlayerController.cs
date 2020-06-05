@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     public Sprite[] Sprites;
 
+    private AudioSource sound01;
+    private AudioSource sound02;
+    private AudioSource sound03;
+
     public bool MoveLock = false;
     public bool isPlaying = false;
     bool KeyMode = false;
@@ -32,6 +36,12 @@ public class PlayerController : MonoBehaviour
         setPos = this.transform.position;
         slider.maxValue = 5;
         slider.value = manpukuCount;
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        sound01 = audioSources[0];
+        sound02 = audioSources[1];
+        sound03 = audioSources[2];
+
     }
 
     // Update is called once per frame
@@ -69,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (isPlaying == true)
         {
             slider.value = manpukuCount;
-            manpukuText.text = ("まんぷくゲージ " + manpukuCount + " / 5");
+            manpukuText.text = (manpukuCount + " / 5");
             scoreCount = eatCount;
             //Debug.Log(eatCount);
 
@@ -93,7 +103,6 @@ public class PlayerController : MonoBehaviour
 
     void KeyPlayMode()
     {
-        Debug.Log("keyMODE");
         isPlaying = true;
         if (MoveLock == false)
         {
@@ -112,6 +121,9 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
+                sound01.Play();
+                sound02.Stop();
+
                 MainSpriteRenderer.sprite = Sprites[2];
                 Debug.Log("drink water!");
                 manpukuCount--;
@@ -123,7 +135,6 @@ public class PlayerController : MonoBehaviour
 
     void JoyConPlayMode()
     {
-        Debug.Log("joyconMODE");
         isPlaying = true;
         if (MoveLock == false)
         {
@@ -132,6 +143,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
+                sound01.Play();
+                sound02.Stop();
                 MainSpriteRenderer.sprite = Sprites[2];
                 Debug.Log("drink water!");
                 manpukuCount--;
@@ -152,9 +165,11 @@ public class PlayerController : MonoBehaviour
     {
             if(other.gameObject.tag == "Soba")
             {
-            MainSpriteRenderer.sprite = Sprites[0];
-
-            Debug.Log("eat");
+                MainSpriteRenderer.sprite = Sprites[0];
+                sound03.Play();
+                sound02.Stop();
+                sound01.Stop();
+                Debug.Log("eat");
                 Destroy(other.gameObject);
                 eatCount++;
                 manpukuCount++;
@@ -162,9 +177,9 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.tag == "SpicySoba")
             {
-            MainSpriteRenderer.sprite = Sprites[1];
-
-            Debug.Log("OMG!");
+                MainSpriteRenderer.sprite = Sprites[1];
+                sound02.Play();
+                Debug.Log("OMG!");
                 Destroy(other.gameObject);
                 manpukuCount++;
             }

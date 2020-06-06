@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.J))
             {
+                sound04.PlayOneShot(sound04.clip);
                 JoyConMode = true;
                 atodekeshitaiText.gameObject.SetActive(false);
 
@@ -137,14 +138,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
                 Invoke("DrinkWater", 0.0f);
-                //sound01.Play();
-                //sound02.Stop();
-
-                MainSpriteRenderer.sprite = Sprites[2];
-                Debug.Log("drink water!");
-                manpukuCount--;
-                Debug.Log(manpukuCount);
-
             }
         }
     }

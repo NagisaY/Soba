@@ -27,10 +27,7 @@ public class joyConTest : MonoBehaviour
     private void Update()
     {
 
-        var stickL = m_joyconL.GetStick();
-        var gyroL = m_joyconL.GetGyro();
         var accelL = m_joyconL.GetAccel();
-        var orientation = m_joyconL.GetVector();
 
         if (drinkWaterReady == false && accelL.x < 0.0f)
         {
@@ -47,7 +44,7 @@ public class joyConTest : MonoBehaviour
             {
                 this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
             }
-            else if (drinkWaterReady == true && accelL.x >= 0.1 && playerController.manpukuCount != 0 && this.transform.position == setPos)
+            else if (drinkWaterReady == true && accelL.x >= 0.8f && playerController.manpukuCount != 0 && this.transform.position == setPos)
             {
                 Debug.Log("aaa");
                 playerController.MainSpriteRenderer.sprite = playerController.Sprites[2];

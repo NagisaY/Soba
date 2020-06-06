@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class joyConTest : MonoBehaviour
+public class Gomi : MonoBehaviour
 {
     private static readonly Joycon.Button[] m_buttons =
         Enum.GetValues(typeof(Joycon.Button)) as Joycon.Button[];
@@ -13,10 +13,9 @@ public class joyConTest : MonoBehaviour
     private Joycon m_joyconL;
     private Joycon m_joyconR;
 
-    public PlayerController playerController;
     Vector3 setPos;
-
     bool drinkWaterReady = false;
+
 
     private void Start()
     {
@@ -32,14 +31,13 @@ public class joyConTest : MonoBehaviour
         var accelL = m_joyconL.GetAccel();
         var orientation = m_joyconL.GetVector();
 
-        if (drinkWaterReady == false && accelL.x < 0.0f)
+        if(drinkWaterReady == false && accelL.x < 0.0f)
         {
             drinkWaterReady = true;
+            Debug.Log(drinkWaterReady);
         }
 
-        if (playerController.MoveLock == false)
-        {
-            if (accelL.y >= 0.5)
+        if (accelL.y >= 0.5)
             {
                 this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
             }
@@ -47,20 +45,18 @@ public class joyConTest : MonoBehaviour
             {
                 this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
             }
-            else if (drinkWaterReady == true && accelL.x >= 0.1 && playerController.manpukuCount != 0 && this.transform.position == setPos)
-            {
-                Debug.Log("aaa");
-                playerController.MainSpriteRenderer.sprite = playerController.Sprites[2];
-                Debug.Log("drink water!");
-                playerController.manpukuCount--;
-                drinkWaterReady = false;
-            }
-            else
+        else if (drinkWaterReady == true && accelL.x >= 0.1)
+        {
+            Debug.Log("aaa");
+            this.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
+            drinkWaterReady = false;
+        }
+        else
             {
                 this.transform.position = setPos;
 
             }
-        }
+        
 
         if (m_joycons == null || m_joycons.Count <= 0) return;
 

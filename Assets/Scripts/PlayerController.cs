@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    SpriteRenderer MainSpriteRenderer;
+    public SpriteRenderer MainSpriteRenderer;
     public GameManager gameManager;
     public joyConTest _joyConTest;
 
     Vector3 setPos;
     public static int eatCount = 0;
-    public static int manpukuCount = 0;
+    public int manpukuCount = 0;
     public int scoreCount;
     public Slider slider;
     public Text manpukuText;
@@ -136,8 +136,9 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
-                sound01.Play();
-                sound02.Stop();
+                Invoke("DrinkWater", 0.0f);
+                //sound01.Play();
+                //sound02.Stop();
 
                 MainSpriteRenderer.sprite = Sprites[2];
                 Debug.Log("drink water!");
@@ -148,7 +149,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void JoyConPlayMode()
+    public void JoyConPlayMode()
     {
         isPlaying = true;
         if (MoveLock == false)
@@ -156,17 +157,18 @@ public class PlayerController : MonoBehaviour
             GetComponent<joyConTest>().enabled = true;
             GetComponent<JoyconManager>().enabled = true;
 
-            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
-            {
-                sound01.Play();
-                sound02.Stop();
-                MainSpriteRenderer.sprite = Sprites[2];
-                Debug.Log("drink water!");
-                manpukuCount--;
-                Debug.Log(manpukuCount);
-
-            }
         }
+    }
+
+    public void DrinkWater()
+    {
+        sound01.Play();
+        sound02.Stop();
+
+        MainSpriteRenderer.sprite = Sprites[2];
+        Debug.Log("drink water!");
+        manpukuCount--;
+        Debug.Log(manpukuCount);
     }
 
     void Release()

@@ -224,8 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaf32ab1813145d9910effdb9666e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainSpriteRenderer: {fileID: 0}
   gameManager: {fileID: 2142574775}
   _joyConTest: {fileID: 0}
+  manpukuCount: 0
   scoreCount: 0
   slider: {fileID: 0}
   manpukuText: {fileID: 0}
@@ -1439,8 +1441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaf32ab1813145d9910effdb9666e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainSpriteRenderer: {fileID: 0}
   gameManager: {fileID: 2142574775}
   _joyConTest: {fileID: 0}
+  manpukuCount: 0
   scoreCount: 0
   slider: {fileID: 1426435280}
   manpukuText: {fileID: 271484222}

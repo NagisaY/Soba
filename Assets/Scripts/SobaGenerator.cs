@@ -46,7 +46,4 @@ public class SobaGenerator : MonoBehaviour
         Instantiate(soba[number], new Vector3(-5.0f, pos_y, 0.0f), Quaternion.identity);
 
     }
-
-    //MEMO
-    //ランダム生成実装
 }

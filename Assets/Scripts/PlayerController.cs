@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int scoreCount;
     public Slider slider;
     public Text manpukuText;
-    public Text atodekeshitaiText;
+    public GameObject atodekeshitaiYatsu;
 
     public Sprite[] Sprites;
 
@@ -60,14 +60,14 @@ public class PlayerController : MonoBehaviour
             {
                 sound04.PlayOneShot(sound04.clip);
                 KeyMode = true;
-                atodekeshitaiText.gameObject.SetActive(false);
+                atodekeshitaiYatsu.gameObject.SetActive(false);
 
             }
             if (Input.GetKey(KeyCode.J))
             {
                 sound04.PlayOneShot(sound04.clip);
                 JoyConMode = true;
-                atodekeshitaiText.gameObject.SetActive(false);
+                atodekeshitaiYatsu.gameObject.SetActive(false);
 
             }
 

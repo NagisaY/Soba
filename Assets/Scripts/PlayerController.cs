@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public SpriteRenderer MainSpriteRenderer;
     public GameManager gameManager;
     public joyConTest _joyConTest;
-    //private Animator animator = null;
 
     private Vector3 setPos;
     public static int eatCount = 0;
@@ -17,8 +15,6 @@ public class PlayerController : MonoBehaviour
     public Slider slider;
     public Text manpukuText;
     public GameObject atodekeshitaiYatsu;
-
-    public Sprite[] Sprites;
 
     private AudioSource sound01;
     private AudioSource sound02;
@@ -38,7 +34,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         //DontDestroyOnLoad(this);
         setPos = this.transform.position;
         slider.maxValue = 5;
@@ -56,7 +51,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(MoveLock);
         if (isPlaying == false)
         {
             if (Input.GetKey(KeyCode.K))
@@ -104,7 +98,6 @@ public class PlayerController : MonoBehaviour
                     manpukuSoundPlay = true;
                 }
                 Manpuku = true;
-                MainSpriteRenderer.sprite = Sprites[3];
                 Debug.Log("onakaippai....");
                 MoveLock = true;
                 this.transform.position = setPos;
@@ -162,19 +155,16 @@ public class PlayerController : MonoBehaviour
         sound01.Play();
         sound02.Stop();
 
-        MainSpriteRenderer.sprite = Sprites[2];
-        Debug.Log("drink water!");
+        //Debug.Log("drink water!");
         manpukuCount--;
-        Debug.Log(manpukuCount);
+        //Debug.Log(manpukuCount);
     }
 
     void Release()
     {
-        //eatSoba = false;
-        //eatSpicySoba = false;
-        MainSpriteRenderer.sprite = Sprites[0];
+        //Debug.Log("Release");
         MoveLock = false;
-        eatSoba = false;
+        //eatSoba = false;
         eatSpicySoba = false;
         if(Manpuku == true)
         {
@@ -187,20 +177,27 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Release2()
+    {
+        eatSoba = false;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
             if(other.gameObject.tag == "Soba")
             {
                 eatSoba = true;
-                if (manpukuCount < 4)
+                //MoveLock = true;
+
+                if (manpukuCount < 4 && eatSpicySoba == false)
                 {
-                    Invoke("Release", 0.80f);
+                    Debug.Log("eat");
+                    Invoke("Release2", 0.50f);
                 }
-                MainSpriteRenderer.sprite = Sprites[0];
                 sound03.Play();
                 sound02.Stop();
                 sound01.Stop();
-                Debug.Log("eat");
                 Destroy(other.gameObject);
                 eatCount++;
                 manpukuCount++;
@@ -208,12 +205,13 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.tag == "SpicySoba")
             {
-
                 eatSpicySoba = true;
                 MoveLock = true;
                 this.transform.position = setPos;
-                Invoke("Release", 1.0f);
-                MainSpriteRenderer.sprite = Sprites[1];
+                if (manpukuCount < 4)
+                {
+                    Invoke("Release", 1.3f);
+                }
                 sound02.Play();
                 Debug.Log("OMG!");
                 Destroy(other.gameObject);

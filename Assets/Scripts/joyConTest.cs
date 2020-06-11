@@ -47,7 +47,6 @@ public class joyConTest : MonoBehaviour
             else if (drinkWaterReady == true && accelL.x >= 0.8f && playerController.manpukuCount != 0 && this.transform.position == setPos)
             {
                 Debug.Log("aaa");
-                playerController.MainSpriteRenderer.sprite = playerController.Sprites[2];
                 Debug.Log("drink water!");
                 playerController.manpukuCount--;
                 drinkWaterReady = false;

@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaf32ab1813145d9910effdb9666e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpriteRenderer: {fileID: 0}
   gameManager: {fileID: 2142574775}
   _joyConTest: {fileID: 0}
   manpukuCount: 0
@@ -232,7 +231,6 @@ MonoBehaviour:
   slider: {fileID: 0}
   manpukuText: {fileID: 0}
   atodekeshitaiYatsu: {fileID: 0}
-  Sprites: []
   MoveLock: 0
   isPlaying: 0
   eatSoba: 0
@@ -414,7 +412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &158888693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2341,7 +2339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaf32ab1813145d9910effdb9666e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpriteRenderer: {fileID: 0}
   gameManager: {fileID: 2142574775}
   _joyConTest: {fileID: 1463570055}
   manpukuCount: 0
@@ -2349,11 +2346,6 @@ MonoBehaviour:
   slider: {fileID: 1426435280}
   manpukuText: {fileID: 271484222}
   atodekeshitaiYatsu: {fileID: 1904498924}
-  Sprites:
-  - {fileID: 21300000, guid: e4b98882d68c242ba9c4f7727d6fe14f, type: 3}
-  - {fileID: 21300000, guid: 0655a8f7efc9d4a1ca050d82cb8bc86d, type: 3}
-  - {fileID: 21300000, guid: 6254a4bcc7d15414e850e161a9bff5f0, type: 3}
-  - {fileID: 21300000, guid: bf873b9d5c768462ab05d7be0a8db00d, type: 3}
   MoveLock: 0
   isPlaying: 0
   eatSoba: 0
@@ -2366,7 +2358,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463570049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

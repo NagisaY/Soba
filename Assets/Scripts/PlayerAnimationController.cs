@@ -27,64 +27,66 @@ public class PlayerAnimationController : MonoBehaviour
 
             if (playerController.MoveLock == false)
             {
-                if (playerController.eatSoba == false || playerController.eatSpicySoba == false)
-                {
-                    animator.SetBool("Eat_right", false);
-                    animator.SetBool("Eat_left", false);
+                //if (playerController.eatSoba == false || playerController.eatSpicySoba == false)
+                    if (playerController.currentPlayerState != PlayerController.PlayerState.Eat_Left
+                        || playerController.currentPlayerState != PlayerController.PlayerState.Eat_Left
+                        || playerController.currentPlayerState != PlayerController.PlayerState.Hot)
+                    {
+                        animator.SetBool("Eat_right", false);
+                        animator.SetBool("Eat_left", false);
 
-                }
+                    }
 
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (playerController.currentPlayerState == PlayerController.PlayerState.Right)
                 {
                     animator.SetBool("Drink", false);
                     animator.SetBool("Turn_right", true);
-                    if (playerController.eatSoba == true)
-                    {
-                        animator.SetBool("Eat_right", true);
-
-                    }
+                }
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Right)
+                {
+                    animator.SetBool("Eat_right", true);
 
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow))
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Left)
                 {
                     animator.SetBool("Drink", false);
                     animator.SetBool("Turn_left", true);
-                    if (playerController.eatSoba == true)
-                    {
-                        animator.SetBool("Eat_left", true);
-
-                    }
+                }
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Left)
+                {
+                    animator.SetBool("Eat_left", true);
 
                 }
-                else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Center)
                 {
                     animator.SetBool("Turn_right", false);
                     animator.SetBool("Turn_left", false);
                 }
-                if (Input.GetKeyDown(KeyCode.Space) && playerController.manpukuCount != 0)
+                if (playerController.currentPlayerState == PlayerController.PlayerState.Drink
+                    && playerController.manpukuCount != 0)
                 {
                     animator.SetBool("Drink", true);
                 }
             }
 
-            if (playerController.eatSpicySoba == true)
+            if (playerController.currentPlayerState == PlayerController.PlayerState.Hot)
             {
                 animator.SetBool("Karai", true);
                 Debug.Log("karaaaaaaaai");
             }
-            else if (playerController.eatSpicySoba == false)
+            else if (playerController.currentPlayerState != PlayerController.PlayerState.Hot)
             {
                 animator.SetBool("Karai", false);
                 //animator.SetBool("Turn_right", false);
                 //animator.SetBool("Turn_left", false);
             }
 
-            if (playerController.Manpuku == true)
+            if (playerController.currentPlayerState == PlayerController.PlayerState.Manpuku)
             {
                 Debug.Log("mannpuku");
                 animator.SetBool("Mannpuku", true);
             }
-            else if (playerController.Manpuku == false)
+            else if (playerController.currentPlayerState != PlayerController.PlayerState.Manpuku)
             {
                 animator.SetBool("Mannpuku", false);
 

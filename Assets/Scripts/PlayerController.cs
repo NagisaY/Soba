@@ -26,15 +26,28 @@ public class PlayerController : MonoBehaviour
     public bool isPlaying = false;
     public bool eatSoba = false;
     public bool eatSpicySoba = false;
-    public bool Manpuku = false;
+    //public bool Manpuku = false;
     bool KeyMode = false;
     bool JoyConMode = false;
     bool manpukuSoundPlay = false;
 
+    public enum PlayerState
+    {
+        Center,
+        Right,
+        Left,
+        Manpuku,
+        Drink,
+        Eat_Right,
+        Eat_Left,
+        Hot
+    }
+
+    public PlayerState currentPlayerState;
+
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(this);
         setPos = this.transform.position;
         slider.maxValue = 5;
         slider.value = manpukuCount;
@@ -51,6 +64,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentPlayerState);
         if (isPlaying == false)
         {
             if (Input.GetKey(KeyCode.K))
@@ -67,7 +81,6 @@ public class PlayerController : MonoBehaviour
                 JoyConMode = true;
                 atodekeshitaiYatsu.gameObject.SetActive(false);
                 isPlaying = true;
-
             }
 
         }
@@ -85,27 +98,39 @@ public class PlayerController : MonoBehaviour
 
         if (isPlaying == true)
         {
+            //まんぷくゲージ
+            //スライダー表示
             slider.gameObject.SetActive(true);
+            //テキスト表示
             manpukuText.gameObject.SetActive(true);
-            slider.value = manpukuCount;
             manpukuText.text = (manpukuCount + " / 5");
+            //Max5
+            slider.value = manpukuCount;
+            //スコア代入
             scoreCount = eatCount;
             //Debug.Log(eatCount);
 
-            if (manpukuCount >= 5)
+            //まんぷく状態
+            if (manpukuCount >= 5 && currentPlayerState != PlayerState.Manpuku)
             {
-                if(manpukuSoundPlay == false)
+                currentPlayerState = PlayerState.Manpuku;
+                //音鳴らす
+                if (manpukuSoundPlay == false)
                 {
                     sound05.PlayOneShot(sound05.clip);
                     manpukuSoundPlay = true;
                 }
-                Manpuku = true;
+                //Manpuku = true;
                 Debug.Log("onakaippai....");
                 MoveLock = true;
                 this.transform.position = setPos;
+
+                //3秒後リリース
                 Invoke("Release", 3.0f);
             }
-            else if (gameManager.timer < 0.0f)
+
+            //ゲーム終了
+            if (gameManager.timer < 0.0f)
             {
                 Debug.Log("shuryo!");
                 MoveLock = true;
@@ -115,6 +140,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //keyMODE
     void KeyPlayMode()
     {
         if (MoveLock == false)
@@ -122,24 +148,45 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                if (currentPlayerState != PlayerState.Eat_Left)
+                {
+                    currentPlayerState = PlayerState.Left;
+                }
                 this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
+                if (currentPlayerState != PlayerState.Eat_Right)
+                {
+                    currentPlayerState = PlayerState.Right;
+                }
                 this.transform.position = new Vector3(5.3f, 0.0f, 0.0f);
             }
             if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
+                currentPlayerState = PlayerState.Center;
                 this.transform.position = setPos;
             }
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
-                eatSoba = false;
-                Invoke("DrinkWater", 0.0f);
+                //eatSoba = false;
+                DrinkWater();
             }
         }
     }
 
+    //水を飲む
+    public void DrinkWater()
+    {
+        currentPlayerState = PlayerState.Drink;
+        sound01.Play();
+        sound02.Stop();
+
+        //Debug.Log("drink water!");
+        manpukuCount--;
+    }
+
+    //joyconMODE
     public void JoyConPlayMode()
     {
         if (MoveLock == false)
@@ -150,74 +197,78 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void DrinkWater()
-    {
-        sound01.Play();
-        sound02.Stop();
-
-        //Debug.Log("drink water!");
-        manpukuCount--;
-        //Debug.Log(manpukuCount);
-    }
-
+    //ロック解除
     void Release()
     {
-        //Debug.Log("Release");
+        Debug.Log("Release");
         MoveLock = false;
         //eatSoba = false;
         eatSpicySoba = false;
-        if(Manpuku == true)
+        if(currentPlayerState == PlayerState.Manpuku)
         {
             manpukuCount = 0;
-            Manpuku = false;
+            //Manpuku = false;
+            currentPlayerState = PlayerState.Center;
         }
         sound02.Stop();
         sound05.Stop();
         manpukuSoundPlay = false;
-
     }
 
     void Release2()
     {
-        eatSoba = false;
+        //eatSoba = false;
+        currentPlayerState = PlayerState.Center;
 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-            if(other.gameObject.tag == "Soba")
+        //そばを食べたら
+        if (other.gameObject.tag == "Soba")
+        {
+            if(currentPlayerState == PlayerState.Right)
             {
-                eatSoba = true;
-                //MoveLock = true;
+                currentPlayerState = PlayerState.Eat_Right;
+            }
+            if (currentPlayerState == PlayerState.Left)
+            {
+                currentPlayerState = PlayerState.Eat_Left;
+            }
+            //eatSoba = true;
+            //MoveLock = true;
 
-                if (manpukuCount < 4 && eatSpicySoba == false)
-                {
-                    Debug.Log("eat");
-                    Invoke("Release2", 0.50f);
-                }
-                sound03.Play();
-                sound02.Stop();
-                sound01.Stop();
-                Destroy(other.gameObject);
-                eatCount++;
-                manpukuCount++;
-                this.transform.position = setPos;
-                this.transform.localScale += new Vector3(0.07f,0.01f,0.0f);
-            }
-            if (other.gameObject.tag == "SpicySoba")
+            if (manpukuCount < 4 && eatSpicySoba == false)
             {
-                eatSpicySoba = true;
-                MoveLock = true;
-                this.transform.position = setPos;
-                if (manpukuCount < 4)
-                {
-                    Invoke("Release", 1.3f);
-                }
-                sound02.Play();
-                Debug.Log("OMG!");
-                Destroy(other.gameObject);
-                manpukuCount++;
+                Debug.Log("eat");
+                Invoke("Release2", 0.50f);
             }
+            sound03.Play();
+            sound02.Stop();
+            sound01.Stop();
+            Destroy(other.gameObject);
+            eatCount++;
+            manpukuCount++;
+            this.transform.position = setPos;
+            this.transform.localScale += new Vector3(0.07f, 0.01f, 0.0f);
+        }
+
+        //辛いそばを食べたら
+        if (other.gameObject.tag == "SpicySoba" && currentPlayerState != PlayerState.Hot)
+        {
+            currentPlayerState = PlayerState.Hot;
+            //eatSpicySoba = true;
+            MoveLock = true;
+            this.transform.position = setPos;
+            if (manpukuCount < 4)
+            {
+                Invoke("Release", 1.3f);
+            }
+            sound02.Play();
+            Debug.Log("OMG!");
+            Destroy(other.gameObject);
+            manpukuCount++;
+        }
     }
 
     public static int getEatCount()

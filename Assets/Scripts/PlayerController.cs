@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
                 sound04.PlayOneShot(sound04.clip);
                 KeyMode = true;
                 atodekeshitaiYatsu.gameObject.SetActive(false);
+                isPlaying = true;
 
             }
             if (Input.GetKey(KeyCode.J))
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
                 sound04.PlayOneShot(sound04.clip);
                 JoyConMode = true;
                 atodekeshitaiYatsu.gameObject.SetActive(false);
+                isPlaying = true;
 
             }
 
@@ -72,12 +74,12 @@ public class PlayerController : MonoBehaviour
 
         if (KeyMode == true)
         {
-            Invoke("KeyPlayMode", 0.0f);
+            KeyPlayMode();
 
         }
         if (JoyConMode == true)
         {
-            Invoke("JoyConPlayMode", 0.0f);
+            JoyConPlayMode();
 
         }
 
@@ -115,7 +117,6 @@ public class PlayerController : MonoBehaviour
 
     void KeyPlayMode()
     {
-        isPlaying = true;
         if (MoveLock == false)
         {
 
@@ -141,7 +142,6 @@ public class PlayerController : MonoBehaviour
 
     public void JoyConPlayMode()
     {
-        isPlaying = true;
         if (MoveLock == false)
         {
             GetComponent<joyConTest>().enabled = true;
@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
                 eatCount++;
                 manpukuCount++;
+                this.transform.position = setPos;
                 this.transform.localScale += new Vector3(0.07f,0.01f,0.0f);
             }
             if (other.gameObject.tag == "SpicySoba")

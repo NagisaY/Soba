@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = 15;
+        timer = 30;
         AudioSource audioSource = GetComponent<AudioSource>();
         sound01 = audioSource;
     }
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(timer);
+        //Debug.Log(timer);
         scoreCountText.text = playerController.scoreCount.ToString() + " はい";
         if(playerController.isPlaying == true)
         {

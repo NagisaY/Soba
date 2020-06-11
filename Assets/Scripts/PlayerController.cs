@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer MainSpriteRenderer;
     public GameManager gameManager;
     public joyConTest _joyConTest;
+    //private Animator animator = null;
 
-    Vector3 setPos;
+    private Vector3 setPos;
     public static int eatCount = 0;
     public int manpukuCount = 0;
     public int scoreCount;
@@ -27,7 +28,9 @@ public class PlayerController : MonoBehaviour
 
     public bool MoveLock = false;
     public bool isPlaying = false;
-    bool Manpuku = false;
+    public bool eatSoba = false;
+    public bool eatSpicySoba = false;
+    public bool Manpuku = false;
     bool KeyMode = false;
     bool JoyConMode = false;
     bool manpukuSoundPlay = false;
@@ -129,7 +132,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
+                this.transform.position = new Vector3(5.3f, 0.0f, 0.0f);
             }
             if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
@@ -137,6 +140,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
             {
+                eatSoba = false;
                 Invoke("DrinkWater", 0.0f);
             }
         }
@@ -166,8 +170,12 @@ public class PlayerController : MonoBehaviour
 
     void Release()
     {
+        //eatSoba = false;
+        //eatSpicySoba = false;
         MainSpriteRenderer.sprite = Sprites[0];
         MoveLock = false;
+        eatSoba = false;
+        eatSpicySoba = false;
         if(Manpuku == true)
         {
             manpukuCount = 0;
@@ -183,6 +191,11 @@ public class PlayerController : MonoBehaviour
     {
             if(other.gameObject.tag == "Soba")
             {
+                eatSoba = true;
+                if (manpukuCount < 4)
+                {
+                    Invoke("Release", 0.80f);
+                }
                 MainSpriteRenderer.sprite = Sprites[0];
                 sound03.Play();
                 sound02.Stop();
@@ -191,10 +204,12 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
                 eatCount++;
                 manpukuCount++;
-            this.transform.localScale += new Vector3(0.07f,0.01f,0.0f);
+                this.transform.localScale += new Vector3(0.07f,0.01f,0.0f);
             }
             if (other.gameObject.tag == "SpicySoba")
             {
+
+                eatSpicySoba = true;
                 MoveLock = true;
                 this.transform.position = setPos;
                 Invoke("Release", 1.0f);

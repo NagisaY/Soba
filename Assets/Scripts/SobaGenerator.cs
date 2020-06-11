@@ -35,7 +35,7 @@ public class SobaGenerator : MonoBehaviour
     {
         number = Random.Range(0, soba.Length);
         float pos_y = Random.Range(6.5f,12.5f); 
-        Instantiate(soba[number], new Vector3(5.0f, pos_y, 0.0f), Quaternion.identity);
+        Instantiate(soba[number], new Vector3(5.2f, pos_y, 0.0f), Quaternion.identity);
 
     }
 

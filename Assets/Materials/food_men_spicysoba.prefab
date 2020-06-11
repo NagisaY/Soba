@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1892708778976847389}
   - component: {fileID: 963859141867093167}
   m_Layer: 0
-  m_Name: food_men_soba 1
+  m_Name: food_men_spicysoba
   m_TagString: SpicySoba
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3672896461246587751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.289, y: 3.289, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 219ff6b5f015d4fd4b9a8d084278acdc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a74af83fd791b46b28fbc33534b56101, type: 3}
+  m_Color: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

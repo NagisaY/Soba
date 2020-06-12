@@ -9,9 +9,13 @@ public class PlayerController : MonoBehaviour
     public joyConTest _joyConTest;
 
     private Vector3 setPos;
+    //食べた累計
     public static int eatCount = 0;
-    public int manpukuCount = 0;
+    //スコア代入用
     public int scoreCount;
+    //MAX５ たまったらまんぷく
+    public int manpukuCount = 0;
+
     public Slider slider;
     public Text manpukuText;
     public GameObject atodekeshitaiYatsu;
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentPlayerState);
         if (isPlaying == false)
         {
+            eatCount = 0;
             if (Input.GetKey(KeyCode.K))
             {
                 sound04.PlayOneShot(sound04.clip);

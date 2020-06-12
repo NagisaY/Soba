@@ -18,7 +18,6 @@ public class TitleUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(a_color);
         startText.color = new Color(1, 1, 1, a_color);
 
         //a_flagがtrueの間実行する

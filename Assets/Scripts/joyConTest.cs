@@ -38,23 +38,31 @@ public class joyConTest : MonoBehaviour
         {
             if (accelL.y >= 0.5)
             {
+                if (playerController.currentPlayerState != PlayerController.PlayerState.Eat_Left)
+                {
+                    playerController.currentPlayerState = PlayerController.PlayerState.Left;
+                }
                 this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
             }
             else if (accelL.y <= -0.5)
             {
+                if (playerController.currentPlayerState != PlayerController.PlayerState.Eat_Right)
+                {
+                    playerController.currentPlayerState = PlayerController.PlayerState.Right;
+                }
                 this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
             }
             else if (drinkWaterReady == true && accelL.x >= 0.8f && playerController.manpukuCount != 0 && this.transform.position == setPos)
             {
-                Debug.Log("aaa");
-                Debug.Log("drink water!");
-                playerController.manpukuCount--;
+                playerController.DrinkWater();
+                //Debug.Log("drink water!");
+                //playerController.manpukuCount--;
                 drinkWaterReady = false;
             }
             else
             {
+                playerController.currentPlayerState = PlayerController.PlayerState.Center;
                 this.transform.position = setPos;
-
             }
         }
 

@@ -225,7 +225,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //そばを食べたら
-        if (other.gameObject.tag == "Soba")
+        if (other.gameObject.tag == "Soba" &&
+           (currentPlayerState != PlayerState.Eat_Left || currentPlayerState != PlayerState.Eat_Right))
         {
             if(currentPlayerState == PlayerState.Right)
             {

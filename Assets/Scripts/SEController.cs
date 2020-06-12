@@ -30,14 +30,13 @@ public class SEController : MonoBehaviour
             //Debug.Log("anyKeyDown");
             sound01.PlayOneShot(sound01.clip);
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow)
-                && (counter == 1 || counter == 2))
+        else if(Input.GetKeyDown(KeyCode.RightArrow) && counter == 1)
         {
             counter++;
             //Debug.Log("RightKeyDown");
             sound01.PlayOneShot(sound01.clip);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && counter == 3)
+        else if (Input.GetKeyDown(KeyCode.Space) && counter == 2)
         {
             counter++;
             sound02.PlayOneShot(sound02.clip);

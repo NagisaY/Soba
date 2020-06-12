@@ -52,6 +52,8 @@ public class TitleSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainScene");
         }
+
+        //できればもうひと画面作る
         //if (Input.GetKeyUp(KeyCode.S) && counter == 2)
         //{
         //    counter++;

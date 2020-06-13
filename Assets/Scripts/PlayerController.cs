@@ -19,6 +19,13 @@ public class PlayerController : MonoBehaviour
     public Slider slider;
     public Text manpukuText;
     public GameObject atodekeshitaiYatsu;
+    public GameObject osumousan;
+    public GameObject owans_5;
+    public GameObject owans_10;
+    public GameObject owans_15;
+    public GameObject owans_25;
+    public GameObject owans_35;
+    public GameObject owans_46;
 
     private AudioSource sound01;
     private AudioSource sound02;
@@ -112,6 +119,13 @@ public class PlayerController : MonoBehaviour
             scoreCount = eatCount;
             //Debug.Log(eatCount);
 
+            if (eatCount >= 5) owans_5.gameObject.SetActive(true);
+            if (eatCount >= 10) owans_10.gameObject.SetActive(true);
+            if (eatCount >= 15) owans_15.gameObject.SetActive(true);
+            if (eatCount >= 25) owans_25.gameObject.SetActive(true);
+            if (eatCount >= 35) owans_35.gameObject.SetActive(true);
+            if (eatCount >= 46) owans_46.gameObject.SetActive(true);
+
             //まんぷく状態
             if (manpukuCount >= 5 && currentPlayerState != PlayerState.Manpuku)
             {
@@ -197,7 +211,6 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<joyConTest>().enabled = true;
             GetComponent<JoyconManager>().enabled = true;
-
         }
     }
 
@@ -248,7 +261,7 @@ public class PlayerController : MonoBehaviour
             eatCount++;
             manpukuCount++;
             this.transform.position = setPos;
-            this.transform.localScale += new Vector3(0.07f, 0.01f, 0.0f);
+            osumousan.transform.localScale += new Vector3(0.009f, 0.002f, 0.0f);
         }
 
         //辛いそばを食べたら

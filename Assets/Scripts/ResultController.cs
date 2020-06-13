@@ -57,6 +57,7 @@ public class ResultController : MonoBehaviour
                 sound01.PlayOneShot(sound01.clip);
                 sound02.PlayOneShot(sound02.clip);
                 sound03.PlayOneShot(sound03.clip);
+                sound04.PlayOneShot(sound04.clip);
 
             }
             else if (resultScore >= 25 && resultScore < 30)
@@ -66,6 +67,8 @@ public class ResultController : MonoBehaviour
                 osumousan.transform.localScale = ozekiSize;
                 banzukeText.text = "大関級！";
                 sound02.PlayOneShot(sound02.clip);
+                sound04.PlayOneShot(sound04.clip);
+
             }
             else if (resultScore >= 15 && resultScore < 25)
             {
@@ -73,6 +76,8 @@ public class ResultController : MonoBehaviour
                 osumousan.transform.localScale = sekiwakeSize;
                 banzukeText.text = "関脇級！";
                 sound03.PlayOneShot(sound03.clip);
+                sound04.PlayOneShot(sound04.clip);
+
             }
             else
             {

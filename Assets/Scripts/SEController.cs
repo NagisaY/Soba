@@ -24,22 +24,27 @@ public class SEController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(counter);
         if (Input.anyKeyDown && counter == 0)
         {
             counter++;
-            //Debug.Log("anyKeyDown");
             sound01.PlayOneShot(sound01.clip);
         }
-        else if(Input.GetKeyDown(KeyCode.RightArrow) && counter == 1)
+        else if(Input.GetKeyDown(KeyCode.RightArrow) && (counter == 1 || counter == 2))
         {
             counter++;
-            //Debug.Log("RightKeyDown");
             sound01.PlayOneShot(sound01.clip);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && counter == 2)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && (counter == 2 || counter == 3))
         {
-            counter++;
+            counter--;
+            sound01.PlayOneShot(sound01.clip);
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && counter == 3)
+        {
+            Debug.Log("dodon");
             sound02.PlayOneShot(sound02.clip);
+            counter++;
             SceneManager.LoadScene("MainScene");
         }
     }

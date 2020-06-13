@@ -22,51 +22,55 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (playerController.isPlaying == true)
         {
-            animator.SetBool("Turn_right", false);
-            animator.SetBool("Turn_left", false);
+            //animator.SetBool("Turn_right", false);
+            //animator.SetBool("Turn_left", false);
 
             if (playerController.MoveLock == false)
             {
-                //if (playerController.eatSoba == false || playerController.eatSpicySoba == false)
-                    if (playerController.currentPlayerState != PlayerController.PlayerState.Eat_Left
-                        || playerController.currentPlayerState != PlayerController.PlayerState.Eat_Left
-                        || playerController.currentPlayerState != PlayerController.PlayerState.Hot)
-                    {
-                        animator.SetBool("Eat_right", false);
-                        animator.SetBool("Eat_left", false);
 
-                    }
+                if (playerController.currentPlayerState == PlayerController.PlayerState.Drink)
+                {
+                    animator.SetBool("Drink", true);
+                }
+                else animator.SetBool("Drink", false);
 
-                if (playerController.currentPlayerState == PlayerController.PlayerState.Right)
-                {
-                    animator.SetBool("Drink", false);
-                    animator.SetBool("Turn_right", true);
-                }
-                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Right)
-                {
-                    animator.SetBool("Eat_right", true);
-
-                }
-                else if (playerController.currentPlayerState == PlayerController.PlayerState.Left)
-                {
-                    animator.SetBool("Drink", false);
-                    animator.SetBool("Turn_left", true);
-                }
-                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Left)
-                {
-                    animator.SetBool("Eat_left", true);
-
-                }
-                else if (playerController.currentPlayerState == PlayerController.PlayerState.Center)
+                if (playerController.currentPlayerState == PlayerController.PlayerState.Center)
                 {
                     animator.SetBool("Turn_right", false);
                     animator.SetBool("Turn_left", false);
                 }
-                if (playerController.currentPlayerState == PlayerController.PlayerState.Drink
-                    && playerController.manpukuCount != 0)
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Right)
                 {
-                    animator.SetBool("Drink", true);
+                    animator.SetBool("Turn_right", true);
+                    //animator.SetBool("Drink", false);
                 }
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Right)
+                {
+                    animator.SetBool("Eat_right", true);
+                    Debug.Log("hellooooo");
+                }
+                else
+                {
+                    animator.SetBool("Turn_right", false);
+                    animator.SetBool("Eat_right", false);
+                }
+
+                if (playerController.currentPlayerState == PlayerController.PlayerState.Left)
+                {
+                    animator.SetBool("Turn_left", true);
+                    //animator.SetBool("Drink", false);
+                }
+                else if (playerController.currentPlayerState == PlayerController.PlayerState.Eat_Left)
+                {
+                    animator.SetBool("Eat_left", true);
+                }
+                else
+                {
+                    animator.SetBool("Turn_left", false);
+                    animator.SetBool("Eat_left", false);
+
+                }
+
             }
 
             if (playerController.currentPlayerState == PlayerController.PlayerState.Hot)
@@ -77,8 +81,6 @@ public class PlayerAnimationController : MonoBehaviour
             else if (playerController.currentPlayerState != PlayerController.PlayerState.Hot)
             {
                 animator.SetBool("Karai", false);
-                //animator.SetBool("Turn_right", false);
-                //animator.SetBool("Turn_left", false);
             }
 
             if (playerController.currentPlayerState == PlayerController.PlayerState.Manpuku)
@@ -95,35 +97,11 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 animator.SetBool("Turn_right", false);
                 animator.SetBool("Turn_left", false);
+                animator.SetBool("Drink", false);
+
             }
         }
 
-
-    }
-
-    void KeyPlayMode()
-    {
-
-    }
-
-    //public void JoyConPlayMode()
-    //{
-    //    playerController.isPlaying = true;
-    //    if (playerController.MoveLock == false)
-    //    {
-    //        GetComponent<joyConTest>().enabled = true;
-    //        GetComponent<JoyconManager>().enabled = true;
-
-    //    }
-    //}
-
-    public void DrinkWater()
-    {
-        Debug.Log("drink water!");
-    }
-
-    void Release()
-    {
     }
 
 }

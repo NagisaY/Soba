@@ -233,8 +233,6 @@ MonoBehaviour:
   atodekeshitaiYatsu: {fileID: 0}
   MoveLock: 0
   isPlaying: 0
-  eatSoba: 0
-  eatSpicySoba: 0
   currentPlayerState: 0
 --- !u!1 &23928679
 GameObject:
@@ -2615,5 +2613,15 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 2142574775}
+    - target: {fileID: 4637092058602206398, guid: d0212c7ff07114a6e8283b701f286586,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637092057904618528, guid: d0212c7ff07114a6e8283b701f286586,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0212c7ff07114a6e8283b701f286586, type: 3}

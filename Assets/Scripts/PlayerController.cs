@@ -28,9 +28,6 @@ public class PlayerController : MonoBehaviour
 
     public bool MoveLock = false;
     public bool isPlaying = false;
-    public bool eatSoba = false;
-    public bool eatSpicySoba = false;
-    //public bool Manpuku = false;
     bool KeyMode = false;
     bool JoyConMode = false;
     bool manpukuSoundPlay = false;
@@ -150,8 +147,7 @@ public class PlayerController : MonoBehaviour
     {
         if (MoveLock == false)
         {
-
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) && currentPlayerState == PlayerState.Center)
             {
                 if (currentPlayerState != PlayerState.Eat_Left)
                 {
@@ -159,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 }
                 this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
             }
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) && currentPlayerState == PlayerState.Center)
             {
                 if (currentPlayerState != PlayerState.Eat_Right)
                 {
@@ -167,14 +163,14 @@ public class PlayerController : MonoBehaviour
                 }
                 this.transform.position = new Vector3(5.3f, 0.0f, 0.0f);
             }
-            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+                && currentPlayerState != PlayerState.Drink)
             {
                 currentPlayerState = PlayerState.Center;
                 this.transform.position = setPos;
             }
-            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && this.transform.position == setPos)
+            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && currentPlayerState == PlayerState.Center)
             {
-                //eatSoba = false;
                 DrinkWater();
             }
         }
@@ -183,11 +179,14 @@ public class PlayerController : MonoBehaviour
     //水を飲む
     public void DrinkWater()
     {
+        if (currentPlayerState != PlayerState.Drink)
+        {
+            Invoke("Release2", 0.30f);
+        }
         currentPlayerState = PlayerState.Drink;
         sound01.Play();
         sound02.Stop();
-
-        //Debug.Log("drink water!");
+        Debug.Log("drink water!");
         manpukuCount--;
     }
 
@@ -207,14 +206,11 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Release");
         MoveLock = false;
-        //eatSoba = false;
-        eatSpicySoba = false;
-        if(currentPlayerState == PlayerState.Manpuku)
+        if (currentPlayerState == PlayerState.Manpuku)
         {
             manpukuCount = 0;
-            //Manpuku = false;
-            currentPlayerState = PlayerState.Center;
         }
+        currentPlayerState = PlayerState.Center;
         sound02.Stop();
         sound05.Stop();
         manpukuSoundPlay = false;
@@ -222,9 +218,7 @@ public class PlayerController : MonoBehaviour
 
     void Release2()
     {
-        //eatSoba = false;
         currentPlayerState = PlayerState.Center;
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -241,14 +235,12 @@ public class PlayerController : MonoBehaviour
             {
                 currentPlayerState = PlayerState.Eat_Left;
             }
-            //eatSoba = true;
-            //MoveLock = true;
 
-            if (manpukuCount < 4 && eatSpicySoba == false)
-            {
-                Debug.Log("eat");
-                Invoke("Release2", 0.50f);
-            }
+            //if (manpukuCount < 4 && currentPlayerState != PlayerState.Hot && currentPlayerState != PlayerState.Drink)
+            //{
+            //    Debug.Log("eat");
+            //    Invoke("Release2", 0.50f);
+            //}
             sound03.Play();
             sound02.Stop();
             sound01.Stop();
@@ -263,7 +255,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "SpicySoba" && currentPlayerState != PlayerState.Hot)
         {
             currentPlayerState = PlayerState.Hot;
-            //eatSpicySoba = true;
             MoveLock = true;
             this.transform.position = setPos;
             if (manpukuCount < 4)

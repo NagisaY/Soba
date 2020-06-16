@@ -156,39 +156,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //keyMODE
-    void KeyPlayMode()
-    {
-        if (MoveLock == false)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow) && currentPlayerState == PlayerState.Center)
-            {
-                if (currentPlayerState != PlayerState.Eat_Left)
-                {
-                    currentPlayerState = PlayerState.Left;
-                }
-                this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
-            }
-            if (Input.GetKey(KeyCode.RightArrow) && currentPlayerState == PlayerState.Center)
-            {
-                if (currentPlayerState != PlayerState.Eat_Right)
-                {
-                    currentPlayerState = PlayerState.Right;
-                }
-                this.transform.position = new Vector3(5.3f, 0.0f, 0.0f);
-            }
-            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-                && currentPlayerState != PlayerState.Drink)
-            {
-                currentPlayerState = PlayerState.Center;
-                this.transform.position = setPos;
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && currentPlayerState == PlayerState.Center)
-            {
-                DrinkWater();
-            }
-        }
-    }
 
     //水を飲む
     public void DrinkWater()
@@ -196,8 +163,9 @@ public class PlayerController : MonoBehaviour
         if (currentPlayerState != PlayerState.Drink)
         {
             Invoke("Release2", 0.30f);
+            currentPlayerState = PlayerState.Drink;
+
         }
-        currentPlayerState = PlayerState.Drink;
         sound01.Play();
         sound02.Stop();
         Debug.Log("drink water!");
@@ -211,6 +179,40 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<joyConTest>().enabled = true;
             GetComponent<JoyconManager>().enabled = true;
+        }
+    }
+
+    //keyMODE
+    void KeyPlayMode()
+    {
+        if (MoveLock == false)
+        {
+            if (Input.GetKey(KeyCode.LeftArrow) && currentPlayerState == PlayerState.Center)
+            {
+                if (currentPlayerState != PlayerState.Eat_Left)
+                {
+                    currentPlayerState = PlayerState.Left;
+                }
+                this.transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow) && currentPlayerState == PlayerState.Center)
+            {
+                if (currentPlayerState != PlayerState.Eat_Right)
+                {
+                    currentPlayerState = PlayerState.Right;
+                }
+                this.transform.position = new Vector3(5.3f, 0.0f, 0.0f);
+            }
+            else if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+                && currentPlayerState != PlayerState.Drink)
+            {
+                currentPlayerState = PlayerState.Center;
+                this.transform.position = setPos;
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && manpukuCount != 0 && currentPlayerState == PlayerState.Center)
+            {
+                DrinkWater();
+            }
         }
     }
 
@@ -249,11 +251,6 @@ public class PlayerController : MonoBehaviour
                 currentPlayerState = PlayerState.Eat_Left;
             }
 
-            //if (manpukuCount < 4 && currentPlayerState != PlayerState.Hot && currentPlayerState != PlayerState.Drink)
-            //{
-            //    Debug.Log("eat");
-            //    Invoke("Release2", 0.50f);
-            //}
             sound03.Play();
             sound02.Stop();
             sound01.Stop();

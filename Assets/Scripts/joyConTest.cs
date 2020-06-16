@@ -16,7 +16,7 @@ public class joyConTest : MonoBehaviour
     public PlayerController playerController;
     Vector3 setPos;
 
-    bool drinkWaterReady = false;
+    //bool drinkWaterReady = false;
 
     private void Start()
     {
@@ -29,10 +29,10 @@ public class joyConTest : MonoBehaviour
 
         var accelL = m_joyconL.GetAccel();
 
-        if (drinkWaterReady == false && accelL.x < 0.0f)
-        {
-            drinkWaterReady = true;
-        }
+        //if (drinkWaterReady == false && accelL.x < 0.0f)
+        //{
+        //    drinkWaterReady = true;
+        //}
 
         if (playerController.MoveLock == false)
         {
@@ -52,14 +52,12 @@ public class joyConTest : MonoBehaviour
                 }
                 this.transform.position = new Vector3(5.0f, 0.0f, 0.0f);
             }
-            else if (drinkWaterReady == true && accelL.x >= 0.8f && playerController.manpukuCount != 0 && this.transform.position == setPos)
+            else if (m_joyconL.GetButtonDown(Joycon.Button.DPAD_UP) && playerController.manpukuCount != 0 && this.transform.position == setPos)
             {
                 playerController.DrinkWater();
-                //Debug.Log("drink water!");
-                //playerController.manpukuCount--;
-                drinkWaterReady = false;
+                playerController.currentPlayerState = PlayerController.PlayerState.Drink;
             }
-            else
+            else if(accelL.y > 0.5 && accelL.y > -0.5 && playerController.currentPlayerState != PlayerController.PlayerState.Drink)
             {
                 playerController.currentPlayerState = PlayerController.PlayerState.Center;
                 this.transform.position = setPos;

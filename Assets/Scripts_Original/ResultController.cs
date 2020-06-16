@@ -53,7 +53,7 @@ public class ResultController : MonoBehaviour
             resultScoreText.text = resultScore.ToString() + " はい";
             if (resultScore >= 30)
             {
-                banzukeText.text = "横綱級！";
+                banzukeText.text = "横綱級!!";
                 owans_sekiwake.gameObject.SetActive(true);
                 owans_ozeki.gameObject.SetActive(true);
                 owans_yokozuna.gameObject.SetActive(true);
@@ -69,7 +69,7 @@ public class ResultController : MonoBehaviour
                 owans_sekiwake.gameObject.SetActive(true);
                 owans_ozeki.gameObject.SetActive(true);
                 osumousan.transform.localScale = ozekiSize;
-                banzukeText.text = "大関級！";
+                banzukeText.text = "大関級!";
                 sound02.PlayOneShot(sound02.clip);
                 sound04.PlayOneShot(sound04.clip);
 
@@ -78,7 +78,7 @@ public class ResultController : MonoBehaviour
             {
                 owans_sekiwake.gameObject.SetActive(true);
                 osumousan.transform.localScale = sekiwakeSize;
-                banzukeText.text = "関脇級！";
+                banzukeText.text = "関脇級!";
                 sound03.PlayOneShot(sound03.clip);
                 sound04.PlayOneShot(sound04.clip);
 

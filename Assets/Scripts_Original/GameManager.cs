@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             timer -= Time.deltaTime;
         }
         //Debug.Log(timer);
-        timerText.text = "のこり時間  " + timer.ToString("f0");
+        timerText.text = "のこりじかん  " + timer.ToString("f0");
 
         if(timer <= 0)
         {

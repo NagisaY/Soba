@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             eatCount = 0;
             if (Input.GetKey(KeyCode.K))
+                //if (Input.GetKeyDown(KeyCode.Space))
             {
                 sound04.PlayOneShot(sound04.clip);
                 KeyMode = true;

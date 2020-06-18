@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
             }
             timeUpText.gameObject.SetActive(true);
-            timerText.text = "のこり時間  0";
+            timerText.text = "のこりじかん  0";
 
             if (timer <= -2.5f)
             {

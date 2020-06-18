@@ -105,10 +105,12 @@ public class ResultController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 SceneManager.LoadScene("MainScene");
+                //SceneManager.LoadScene("(OnlyKeyMode)MainScene");
             }
             if (Input.GetKeyDown(KeyCode.T))
             {
                 SceneManager.LoadScene("TitleScene");
+                //SceneManager.LoadScene("(OnlyKeyMode)TitleScene");
             }
         }
         //MEMO	横綱	大関 関脇 小結

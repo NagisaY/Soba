@@ -31,17 +31,9 @@ public class OnlyKeyMode_TitleSceneManager : MonoBehaviour
         //intro1→2枚目
         else if(Input.GetKeyUp(KeyCode.RightArrow) && counter == 1)
         {
-            //if (Input.GetKeyUp(KeyCode.RightArrow) && counter == 1)
-            //{
                 counter++;
                 Debug.Log("rightKey1->2");
-            //}
 
-            //else if (Input.GetKeyUp(KeyCode.LeftArrow) && counter == 3)
-            //{
-            //    counter--;
-            //    Debug.Log("leftKey2->1");
-            //}
             intro1.gameObject.SetActive(false);
             intro2.gameObject.SetActive(true);
             //intro3.gameObject.SetActive(false);
@@ -60,17 +52,6 @@ public class OnlyKeyMode_TitleSceneManager : MonoBehaviour
             rightKey.gameObject.SetActive(true);
 
         }
-        ////intro2→3枚目
-        //else if (Input.GetKeyDown(KeyCode.RightArrow) && counter == 2)
-        //{
-        //    counter++;
-        //    Debug.Log("rightKey2->3");
-        //    intro2.gameObject.SetActive(false);
-        //    intro3.gameObject.SetActive(true);
-        //    rightKey.gameObject.SetActive(false);
-        //    spaceKey.gameObject.SetActive(true);
-
-        //}
 
     }
 }
@@ -80,4 +61,4 @@ public class OnlyKeyMode_TitleSceneManager : MonoBehaviour
 //直すところ
 //ResultControllerのロードするシーン名
 //PlayerControllerの最初に押すキーの設定
-//  space→Kに戻す,JoyConMode遷移戻す
+//  space→K,JoyConMode遷移
